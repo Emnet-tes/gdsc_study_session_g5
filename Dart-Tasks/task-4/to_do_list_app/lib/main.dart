@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Thirdscreen(),
+      home: Firstscreen(),
     );
   }
 }
@@ -34,7 +34,10 @@ class Firstscreen extends StatelessWidget {
             color: Color.fromARGB(255, 71, 125, 206),
             borderRadius: BorderRadius.circular(7)),
         child: TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => Secondscreen()));
+          },
           child: Text('Get Started',
               style:
                   TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -54,9 +57,19 @@ class Secondscreen extends StatelessWidget {
           backgroundColor: Colors.white,
           title: Text("To do list"),
           centerTitle: true,
-          leading: Icon(Icons.arrow_back_ios),
+          leading: IconButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Firstscreen()));
+              },
+              icon: Icon(Icons.arrow_back_ios_new)),
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.more_vert_sharp))
+            IconButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Firstscreen()));
+                },
+                icon: Icon(Icons.more_vert_sharp))
           ],
         ),
         body: Center(
@@ -274,7 +287,12 @@ class Secondscreen extends StatelessWidget {
                         color: const Color.fromARGB(255, 182, 42, 0),
                         borderRadius: BorderRadius.circular(7)),
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Thirdscreen()));
+                      },
                       child: Text('Create task',
                           style: TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold),
@@ -294,7 +312,12 @@ class Thirdscreen extends StatelessWidget {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
-          leading: Icon(Icons.arrow_back_ios),
+          leading: IconButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Secondscreen()));
+              },
+              icon: Icon(Icons.arrow_back_ios)),
           actions: [
             IconButton(onPressed: () {}, icon: Icon(Icons.more_vert_sharp))
           ],
@@ -304,134 +327,284 @@ class Thirdscreen extends StatelessWidget {
           ),
           centerTitle: true,
         ),
-
-        body: Center(child :Container (
+        body: Center(
+            child: Container(
           height: 550,
-          width:250,
-          child: Column(
-            children:[
+          width: 250,
+          child: Column(children: [
             Container(
-              child:Text('Main task name' ,style: TextStyle(fontWeight: FontWeight.w400,color: Colors.deepOrange),
+              child: Text(
+                'Main task name',
+                style: TextStyle(
+                    fontWeight: FontWeight.w400, color: Colors.deepOrange),
+              ),
+              alignment: Alignment.bottomLeft,
+              padding: EdgeInsets.symmetric(vertical: 10),
             ),
-            alignment: Alignment.bottomLeft,
-            padding: EdgeInsets.symmetric(vertical: 10),
-             ),
             Container(
-                    height: 50,
-                    width: 250,
-                    decoration: BoxDecoration(
-                        color: Colors.grey[300],
-                        borderRadius: BorderRadius.circular(7),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color.fromARGB(69, 0, 0, 0),
-                            blurRadius: 2,
-                            offset: Offset(4, 8), // Shadow position
-                          ),
-                        ]),
-                    child: Row(
-                      children: [
-                        Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                        Text('Ui/Ux App design',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black))
-                      ],
+              height: 50,
+              width: 250,
+              decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(7),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color.fromARGB(69, 0, 0, 0),
+                      blurRadius: 2,
+                      offset: Offset(4, 8), // Shadow position
                     ),
-                  ),
-                  Container(
-                    child: Text(
-                      'Due Date',
+                  ]),
+              child: Row(
+                children: [
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                  Text('Ui/Ux App design',
                       style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          color: Colors.deepOrange,),
-                    ),
-                    alignment: Alignment.bottomLeft,
-                    padding: EdgeInsets.symmetric(vertical: 10)
+                          fontWeight: FontWeight.w400, color: Colors.black))
+                ],
+              ),
+            ),
+            Container(
+                child: Text(
+                  'Due Date',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    color: Colors.deepOrange,
                   ),
-                  Container(
-                    height: 50,
-                    width: 250,
-                    decoration: BoxDecoration(
-                        color: Colors.grey[300],
-                        borderRadius: BorderRadius.circular(7),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color.fromARGB(69, 0, 0, 0),
-                            blurRadius: 2,
-                            offset: Offset(4, 8), // Shadow position
-                          ),
-                        ]),
-                    child: Row(
-                      children: [
-                        Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                        Expanded(
-                          flex: 2,
-                          child:Text('24/12/2004',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                color: Color.fromARGB(220, 0, 0, 0))) ),
-                                Expanded(child:IconButton(
-                            onPressed: () {}, icon: Icon(Icons.calendar_month_sharp,color: Colors.deepOrange,)) )
-                         ],
-                      
+                ),
+                alignment: Alignment.bottomLeft,
+                padding: EdgeInsets.symmetric(vertical: 10)),
+            Container(
+              height: 50,
+              width: 250,
+              decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(7),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color.fromARGB(69, 0, 0, 0),
+                      blurRadius: 2,
+                      offset: Offset(4, 8), // Shadow position
                     ),
+                  ]),
+              child: Row(
+                children: [
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                  Expanded(
+                      flex: 2,
+                      child: Text('24/12/2004',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              color: Color.fromARGB(220, 0, 0, 0)))),
+                  Expanded(
+                      child: IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.calendar_month_sharp,
+                            color: Colors.deepOrange,
+                          )))
+                ],
+              ),
+            ),
+            Container(
+              child: Text(
+                'Description',
+                style: TextStyle(
+                    fontWeight: FontWeight.w400, color: Colors.deepOrange),
+              ),
+              alignment: Alignment.bottomLeft,
+              padding: EdgeInsets.symmetric(vertical: 10),
+            ),
+            Container(
+              height: 90,
+              width: 250,
+              decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(7),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color.fromARGB(69, 0, 0, 0),
+                      blurRadius: 2,
+                      offset: Offset(4, 8), // Shadow position
+                    ),
+                  ]),
+              child: Row(
+                children: [
+                  Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                  Expanded(
+                      child: Text(
+                          "First i have to animate the logo and later prototyping my design.it's very important",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black)))
+                ],
+              ),
+            ),
+            Container(
+                child: Column(
+              children: [
+                Padding(padding: EdgeInsets.symmetric(vertical: 20)),
+                Container(
+                  height: 30,
+                  width: 130,
+                  decoration: BoxDecoration(
+                      color: Colors.deepOrange,
+                      borderRadius: BorderRadius.circular(15)),
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Forthscreen()));
+                    },
+                    child: Text('Add task',
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center),
                   ),
-                              Container(
-              child:Text('Description' ,style: TextStyle(fontWeight: FontWeight.w400,color: Colors.deepOrange),
+                )
+              ],
+            ))
+          ]),
+        )));
+  }
+}
+
+class Forthscreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          leading: IconButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Thirdscreen()));
+              },
+              icon: Icon(Icons.arrow_back_ios)),
+          actions: [
+            IconButton(onPressed: () {}, icon: Icon(Icons.more_vert_sharp))
+          ],
+          title: Text(
+            'Task detail',
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
+        ),
+        body: Center(
+            child: Column(children: [
+          Container(
+            child: Image(
+              image: AssetImage('images/ffc59a872471119ae7786ed082c7eb84.png'),
+            ),
+            height: 200,
+            width: 250,
+          ),
+          Container(
+            child: Text(
+              'Title',
+              style: TextStyle(
+                  fontWeight: FontWeight.w400, color: Colors.deepOrange),
             ),
             alignment: Alignment.bottomLeft,
-            padding: EdgeInsets.symmetric(vertical: 10),
-             ),
-            Container(
-                    height: 90,
-                    width: 250,
-                    decoration: BoxDecoration(
-                        color: Colors.grey[300],
-                        borderRadius: BorderRadius.circular(7),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color.fromARGB(69, 0, 0, 0),
-                            blurRadius: 2,
-                            offset: Offset(4, 8), // Shadow position
-                          ),
-                        ]),
-                    child: Row(
-                      children: [
-                        Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                        Expanded(child:Text("First i have to animate the logo and later prototyping my design.it's very important",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black)) )
-                        
-                      ],
-                    ),
-                  )
-             ,
-             Container(
+            padding: EdgeInsets.symmetric(horizontal: 50),
+          ),
+          Container(
+            height: 50,
+            width: 250,
+            decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(7),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color.fromARGB(69, 0, 0, 0),
+                    blurRadius: 2,
+                    offset: Offset(4, 8), // Shadow position
+                  ),
+                ]),
+            child: Row(
+              children: [
+                Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                Text('Ui/Ux App design',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400, color: Colors.black))
+              ],
+            ),
+          ),
+          Container(
+              child: Text(
+                'Description',
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  color: Colors.deepOrange,
+                ),
+              ),
+              alignment: Alignment.bottomLeft,
+              padding: EdgeInsets.symmetric(horizontal: 50)),
+          Container(
+            height: 100,
+            width: 250,
+            decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(7),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color.fromARGB(69, 0, 0, 0),
+                    blurRadius: 2,
+                    offset: Offset(4, 8), // Shadow position
+                  ),
+                ]),
+            child: Row(
+              children: [
+                Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                Expanded(
+                    flex: 2,
+                    child: Text(
+                        "First i have to animate the logo and later prototyping my design.it's very important",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            color: Color.fromARGB(220, 0, 0, 0)))),
+              ],
+            ),
+          ),
+          Container(
+            child: Text(
+              'Due date',
+              style: TextStyle(
+                  fontWeight: FontWeight.w400, color: Colors.deepOrange),
+            ),
+            alignment: Alignment.bottomLeft,
+            padding: EdgeInsets.symmetric(horizontal: 50),
+          ),
+          Container(
+            height: 50,
+            width: 250,
+            decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(7),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color.fromARGB(69, 0, 0, 0),
+                    blurRadius: 2,
+                    offset: Offset(4, 8), // Shadow position
+                  ),
+                ]),
+            child: Row(
+              children: [
+                Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                Expanded(
+                    child: Text("24/12/2004 ",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400, color: Colors.black)))
+              ],
+            ),
+          ),
+          Container(
               child: Column(
-                      children: [
-                        Padding(padding: EdgeInsets.symmetric(vertical: 20)),
-                        Container(
-                    height: 30,
-                    width: 130,
-                    decoration: BoxDecoration(
-                        color: Colors.deepOrange,
-                        borderRadius: BorderRadius.circular(15)),
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Text('Add task',
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.center),
-                          
-                    ),
-                  ) 
-          ],
-          )
-        )
-        ] ),      
-                )
-                ));
+            children: [
+              Padding(padding: EdgeInsets.symmetric(vertical: 20)),
+            ],
+          ))
+        ])));
   }
 }
