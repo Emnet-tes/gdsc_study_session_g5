@@ -56,7 +56,7 @@ class MyHomePage extends StatelessWidget {
         Container(
           margin: EdgeInsets.only(top: 10.0),
           alignment: Alignment.center,
-          width: 300,
+          width: 250,
           height: 200.0,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(8.0)),
@@ -96,7 +96,7 @@ class MyHomePage extends StatelessWidget {
                           TextSpan(
                               text: 'Leader',
                               style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 50.0)),
+                                  fontWeight: FontWeight.bold, fontSize: 45.0)),
                         ],
                       )),
                       Padding(padding: EdgeInsets.only(bottom: 20.0)),
