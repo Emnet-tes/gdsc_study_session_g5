@@ -16,8 +16,23 @@ class _ForthscreenState extends State<Forthscreen> {
           backgroundColor: Colors.white,
           leading: IconButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Thirdscreen()));
+                Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      transitionDuration: Duration(seconds: 1),
+                      transitionsBuilder:
+                          (context, animation, AnimationTime, child) {
+                        animation = CurvedAnimation(
+                            parent: animation, curve: Curves.decelerate);
+                        return ScaleTransition(
+                            scale: animation,
+                            alignment: Alignment.center,
+                            child: child);
+                      },
+                      pageBuilder: (context, animation, animationTime) {
+                        return Thirdscreen();
+                      },
+                    ));
               },
               icon: Icon(Icons.arrow_back_ios)),
           actions: [

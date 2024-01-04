@@ -1,31 +1,27 @@
 import 'package:flutter/material.dart';
+
 import 'package:to_do_list_app/pages/Firstscreen.dart';
 import 'package:to_do_list_app/pages/Thirdscreen.dart';
 
 import 'package:to_do_list_app/util/todo_tile.dart';
 
-
 class Secondscreen extends StatefulWidget {
   @override
   State<Secondscreen> createState() => _SecondscreenState();
 }
-List todolist = [
-    ['make design', false],
-    ['study', false]
-  ];
-class _SecondscreenState extends State<Secondscreen> {
-  
 
+List todolist = [
+  ['make design', false],
+  ['study', false]
+];
+
+class _SecondscreenState extends State<Secondscreen> {
   //check box tapped
   void Checkboxchanged(bool? value, index) {
     setState(() {
       todolist[index][1] = !todolist[index][1];
-      
     });
   }
-
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +33,25 @@ class _SecondscreenState extends State<Secondscreen> {
           centerTitle: true,
           leading: IconButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Firstscreen()));
+                Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      transitionDuration: Duration(seconds: 1),
+                      transitionsBuilder:
+                          (context, animation, AnimationTime, child) {
+                        animation = CurvedAnimation(
+                            parent: animation, curve: Curves.bounceIn);
+                        return ScaleTransition(
+                            scale: animation,
+                            alignment: Alignment.center,
+                            child: child);
+                      },
+                      pageBuilder: (context, animation, animationTime) {
+                        return Firstscreen();
+                      },
+                    ));
               },
-              icon: Icon(Icons.arrow_back_ios_new)),
+              icon: Icon(Icons.arrow_back_ios)),
           actions: [
             IconButton(
                 onPressed: () {
@@ -59,8 +70,23 @@ class _SecondscreenState extends State<Secondscreen> {
               onPressed: () {
                 // Respond to button press
 
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Thirdscreen()));
+                Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      transitionDuration: Duration(seconds: 1),
+                      transitionsBuilder:
+                          (context, animation, AnimationTime, child) {
+                        animation = CurvedAnimation(
+                            parent: animation, curve: Curves.decelerate);
+                        return ScaleTransition(
+                            scale: animation,
+                            alignment: Alignment.center,
+                            child: child);
+                      },
+                      pageBuilder: (context, animation, animationTime) {
+                        return Thirdscreen();
+                      },
+                    ));
               },
               icon: Icon(
                 Icons.add,

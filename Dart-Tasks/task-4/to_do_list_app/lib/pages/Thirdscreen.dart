@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_list_app/pages/Secondscreen.dart';
+import 'package:intl/intl.dart';
 import 'package:to_do_list_app/pages/Forthscreen.dart';
+import 'package:to_do_list_app/pages/Secondscreen.dart';
+
+final _formkey = GlobalKey<FormState>();
 
 class Thirdscreen extends StatefulWidget {
   @override
@@ -33,8 +36,23 @@ class _ThirdscreenState extends State<Thirdscreen> {
           backgroundColor: Colors.white,
           leading: IconButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Secondscreen()));
+               Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      transitionDuration: Duration(seconds: 1),
+                      transitionsBuilder:
+                          (context, animation, AnimationTime, child) {
+                        animation = CurvedAnimation(
+                            parent: animation, curve: Curves.decelerate);
+                        return ScaleTransition(
+                            scale: animation,
+                            alignment: Alignment.center,
+                            child: child);
+                      },
+                      pageBuilder: (context, animation, animationTime) {
+                        return Secondscreen();
+                      },
+                    ));
               },
               icon: Icon(Icons.arrow_back_ios)),
           actions: [
@@ -53,7 +71,6 @@ class _ThirdscreenState extends State<Thirdscreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Container(),
                   Container(
                       child: Text(
                         'Task Name',
@@ -81,7 +98,6 @@ class _ThirdscreenState extends State<Thirdscreen> {
                           ),
                         ]),
                     child: TextFormField(
-                      controller: taskinputcontroller,
                       decoration: InputDecoration(
                         hintText: 'ui/ux design',
                         border: InputBorder.none,
@@ -99,34 +115,48 @@ class _ThirdscreenState extends State<Thirdscreen> {
                       alignment: Alignment.bottomLeft,
                       padding: EdgeInsets.symmetric(horizontal: 50)),
                   Container(
-                    height: 50,
-                    width: 250,
-                    padding: EdgeInsets.only(left: 10.0),
-                    decoration: BoxDecoration(
-                        color: Colors.grey[300],
-                        borderRadius: BorderRadius.circular(7),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color.fromARGB(106, 0, 0, 0),
-                            blurRadius: 4,
-                            offset: Offset(4, 8), // Shadow position
-                          ),
-                        ]),
-                    child: TextFormField(
-                      controller: taskdatecontroller,
-                      decoration: InputDecoration(
-                          hintText: '10/12/2024',
-                          border: InputBorder.none,
-                          suffixIcon: Icon(
-                            Icons.calendar_month_outlined,
-                            color: Colors.deepOrange,
-                          )),
-                      readOnly: true,
-                      onTap: () {
-                        selectDate();
-                      },
-                    ),
-                  ),
+                      height: 50,
+                      width: 250,
+                      padding: EdgeInsets.only(left: 10.0),
+                      decoration: BoxDecoration(
+                          color: Colors.grey[300],
+                          borderRadius: BorderRadius.circular(7),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color.fromARGB(106, 0, 0, 0),
+                              blurRadius: 4,
+                              offset: Offset(4, 8), // Shadow position
+                            ),
+                          ]),
+                      child: Form(
+                        key: _formkey,
+                        child: TextFormField(
+                          controller: datecontroller,
+                          decoration: InputDecoration(
+                              hintText: '10/12/2024',
+                              border: InputBorder.none,
+                              suffixIcon: Icon(
+                                Icons.calendar_month_outlined,
+                                color: Colors.deepOrange,
+                              )),
+                          readOnly: true,
+                          onTap: () async {
+                            DateTime? pickeddate = await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(2000),
+                                lastDate: DateTime(2027));
+
+                            if (pickeddate != null) {
+                              setState(() {
+                                datecontroller.text =
+                                    DateFormat('d,MM,yyy').format(
+                                        pickeddate);
+                              });
+                            }
+                          },
+                        ),
+                      )),
                   Container(
                       child: Text(
                         'Description',
@@ -174,9 +204,22 @@ class _ThirdscreenState extends State<Thirdscreen> {
                     borderRadius: BorderRadius.circular(15)),
                 child: TextButton(
                   onPressed: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(
-                      builder: (context) => Forthscreen(),
+                    Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      transitionDuration: Duration(seconds: 1),
+                      transitionsBuilder:
+                          (context, animation, AnimationTime, child) {
+                        animation = CurvedAnimation(
+                            parent: animation, curve: Curves.decelerate);
+                        return ScaleTransition(
+                            scale: animation,
+                            alignment: Alignment.center,
+                            child: child);
+                      },
+                      pageBuilder: (context, animation, animationTime) {
+                        return Forthscreen();
+                      },
                     ))
                         .then((value) {
                       taskinsert();
@@ -196,8 +239,23 @@ class _ThirdscreenState extends State<Thirdscreen> {
                     borderRadius: BorderRadius.circular(15)),
                 child: TextButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Thirdscreen()));
+                    Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          transitionDuration: Duration(seconds: 1),
+                          transitionsBuilder:
+                              (context, animation, AnimationTime, child) {
+                            animation = CurvedAnimation(
+                                parent: animation, curve: Curves.decelerate);
+                            return ScaleTransition(
+                                scale: animation,
+                                alignment: Alignment.center,
+                                child: child);
+                          },
+                          pageBuilder: (context, animation, animationTime) {
+                            return Thirdscreen();
+                          },
+                        ));
                   },
                   child: Text('cancel',
                       style: TextStyle(
@@ -208,18 +266,5 @@ class _ThirdscreenState extends State<Thirdscreen> {
             ],
           )),
         ]));
-  }
-
-  Future<void> selectDate() async {
-    DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(2000),
-        lastDate: DateTime(2024));
-    if (picked != null) {
-      setState(() {
-        datecontroller.text = picked.toString().split(" ")[0];
-      });
-    }
   }
 }

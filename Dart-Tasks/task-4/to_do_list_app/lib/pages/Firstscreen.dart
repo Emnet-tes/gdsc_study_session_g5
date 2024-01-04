@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:to_do_list_app/pages/Secondscreen.dart';
 class Firstscreen extends StatefulWidget {
   @override
@@ -10,11 +11,7 @@ class _FirstscreenState extends State<Firstscreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: ListView(children: [
-      Image(
-        image: AssetImage(
-          'images/istockphoto-1271149787-612x612.jpg',
-        ),
-      ),
+      Lottie.network('https://lottie.host/ae2dda81-a2d1-4fe2-ab9f-1ee5f5d62f46/eJzSjFJUUT.json'),
       Padding(padding: EdgeInsets.symmetric(vertical: 70.0)),
       Row(children: [
         Padding(padding: EdgeInsets.symmetric(horizontal: 15.0)),
