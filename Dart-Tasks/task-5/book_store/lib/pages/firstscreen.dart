@@ -305,7 +305,7 @@ class firstscreen extends StatelessWidget {
                         MaterialPageRoute(
                             builder: (context) => Bookdetail(
                                 book_img: 'images/pluto.jpg',
-                                book_name: 'scientific books')));
+                                book_name: 'sientific books')));
                   },
                   child:Cards(
                     about_img: 'sientific books',

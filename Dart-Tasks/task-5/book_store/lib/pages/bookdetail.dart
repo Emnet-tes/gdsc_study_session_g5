@@ -292,7 +292,7 @@ class Bookdetail extends StatelessWidget {
                                                     book_img:
                                                         'images/pluto.jpg',
                                                     book_name:
-                                                        'scientific books')));
+                                                        'sientific books')));
                                       },
                                       child: Cards(
                                           about_img: 'sientific books',
