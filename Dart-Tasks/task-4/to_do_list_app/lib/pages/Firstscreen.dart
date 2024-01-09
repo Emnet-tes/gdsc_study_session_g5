@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:to_do_list_app/pages/Secondscreen.dart';
+import 'package:to_do_list_app/pages/Todolist.dart';
 class Firstscreen extends StatefulWidget {
   @override
   State<Firstscreen> createState() => _FirstscreenState();
